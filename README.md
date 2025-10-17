@@ -15,7 +15,6 @@ It ships with a comprehensive `.gitleaks.toml` ruleset that covers common cloud 
 
 - Teams who want a practical, low-friction way to prevent and detect leaked keys and tokens  
 - Individual developers who want better safety checks on their machine  
-- Security champions who need evidence of continuous improvement and reduced exposure time
 
 ---
 
