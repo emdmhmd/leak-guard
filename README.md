@@ -46,16 +46,7 @@ leak-guard/
 
 ## Quick start (as a template)
 
-### Make this repository a template
-
-1. Push this repository to GitHub as `leak-guard`.  
-2. On GitHub: **Settings → General → Template repository → tick it**.  
-3. Optional hardening: **Settings → Branches → Add rule for `main`**  
-   - Require pull request before merging  
-   - Require status checks to pass (select `secret-scan`)  
-   - Restrict who can push to `main` if you wish
-
-### Use the template
+### Use this a the template
 
 1. Click **Use this template → Create a new repository**.  
 2. Clone your new repository.  
