@@ -1,0 +1,194 @@
+title = "Comprehensive secrets policy (broad coverage, high signal)"
+
+[allowlist]
+paths = [
+  '''^docs/''',
+  '''^test/fixtures/''',
+  '''^tests?/fixtures?/''',
+  '''^examples/fake-secrets/''',
+  '''^example(s)?/''',
+]
+regexes = [
+  '''FAKE_SECRET_[A-Z0-9]{8,}''',
+  '''DUMMY_(TOKEN|KEY|SECRET)''',
+  '''EXAMPLE(_|-)SECRET''',
+  '''TEST_(TOKEN|KEY|SECRET)''',
+  '''PLACEHOLDER_(TOKEN|KEY|SECRET)''',
+]
+
+
+[[rules]]
+id = "pem-private-key"
+description = "PEM Private Key (RSA/EC/DSA/PKCS8/OpenSSH)"
+regex = '''-----BEGIN (RSA|EC|DSA|OPENSSH|PRIVATE) KEY-----'''
+secretGroup = 0
+
+[[rules]]
+id = "ssh-private-key"
+description = "OpenSSH private key"
+regex = '''BEGIN OPENSSH PRIVATE KEY'''
+secretGroup = 0
+
+[[rules]]
+id = "aws-access-key-id"
+description = "AWS Access Key ID"
+regex = '''\b(AKIA|ASIA|AGPA|AIDA|ANPA|AROA|AIPA|ANVA)[0-9A-Z]{16}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "aws-secret-access-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)\b(aws_)?secret(\s|_)?access(\s|_)?key\b.{0,20}['"]?([A-Za-z0-9\/+=]{40})['"]?'''
+secretGroup = 4
+
+[[rules]]
+id = "google-api-key"
+description = "Google API Key"
+regex = '''\bAIza[0-9A-Za-z\-_]{35}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "gcp-service-account"
+description = "GCP service account private key JSON"
+regex = '''(?s)"type"\s*:\s*"service_account".*"private_key"\s*:\s*"-----BEGIN PRIVATE KEY-----'''
+secretGroup = 0
+
+[[rules]]
+id = "github-token"
+description = "GitHub token (classic/fine-grained)"
+regex = '''\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{30,255}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "github-pat"
+description = "GitHub PAT (fine-grained)"
+regex = '''\bgithub_pat_[A-Za-z0-9_]{22,255}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "gitlab-pat"
+description = "GitLab Personal Access Token"
+regex = '''\bglpat-[A-Za-z0-9\-_]{20,}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "slack-webhook"
+description = "Slack webhook URL"
+regex = '''https://hooks\.slack\.com/services/T[a-zA-Z0-9_]+/B[a-zA-Z0-9_]+/[a-zA-Z0-9_]+'''
+secretGroup = 0
+
+[[rules]]
+id = "slack-token"
+description = "Slack bot/user OAuth token"
+regex = '''\b(xox[baprs]-[A-Za-z0-9\-]{10,})\b'''
+secretGroup = 1
+
+[[rules]]
+id = "discord-webhook"
+description = "Discord webhook URL"
+regex = '''https://(discordapp\.com|discord\.com)/api/webhooks/\d+/[A-Za-z0-9\-_]{10,}'''
+secretGroup = 0
+
+[[rules]]
+id = "telegram-bot-token"
+description = "Telegram bot token"
+regex = '''\b[0-9]{6,}:[A-Za-z0-9_\-]{30,}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "stripe-secret-key"
+description = "Stripe Secret Key (sk_live|sk_test)"
+regex = '''\bsk_(live|test)_[0-9a-zA-Z]{24}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "sendgrid-api-key"
+description = "SendGrid API key"
+regex = '''\bSG\.[A-Za-z0-9\-_]{16,}\.[A-Za-z0-9\-_]{16,}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "mailgun-api-key"
+description = "Mailgun API key"
+regex = '''\bkey-[0-9a-zA-Z]{32}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "twilio-auth"
+description = "Twilio Account SID/Auth Token"
+regex = '''(?i)\b(TWILIO|ACCOUNT[_-]?SID|AUTH[_-]?TOKEN)\b.{0,40}\b(AC[a-f0-9]{32}|SK[a-f0-9]{32}|[a-f0-9]{32})\b'''
+secretGroup = 2
+
+[[rules]]
+id = "datadog-api-key"
+description = "Datadog API key (32 hex)"
+regex = '''(?i)\b(DD_API_KEY|DATADOG_API_KEY)\b.{0,20}\b([a-f0-9]{32})\b'''
+secretGroup = 2
+
+[[rules]]
+id = "sentry-dsn"
+description = "Sentry DSN"
+regex = '''https://[a-f0-9]{32}@o\d+\.ingest\.sentry\.io/\d+'''
+secretGroup = 0
+
+[[rules]]
+id = "newrelic-user-key"
+description = "New Relic user API key (NRAK-...)"
+regex = '''\bNRAK-[A-Za-z0-9]{27}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "pagerduty-api-key"
+description = "PagerDuty API key"
+regex = '''\bPDAK-[A-Za-z0-9]{20,}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "basic-auth-url"
+description = "Credentials embedded in URL (user:pass@host)"
+regex = '''https?://[^/\s:@]+:[^/\s:@]+@[^/\s]+'''
+secretGroup = 0
+
+[[rules]]
+id = "postgres-url"
+description = "Postgres connection string with password"
+regex = '''\bpostgres(ql)?://[^:\s]+:[^@\s]+@[^/\s:]+(:\d+)?/[^?\s]+'''
+secretGroup = 0
+
+[[rules]]
+id = "mysql-url"
+description = "MySQL connection string with password"
+regex = '''\bmysql(\+mysqlconnector|\+pymysql|\+mysqlclient)?://[^:\s]+:[^@\s]+@[^/\s:]+(:\d+)?/[^?\s]+'''
+secretGroup = 0
+
+[[rules]]
+id = "mongodb-url"
+description = "MongoDB connection string with password"
+regex = '''\bmongodb(\+srv)?:\/\/[^:\s]+:[^@\s]+@[^/\s]+'''
+secretGroup = 0
+
+[[rules]]
+id = "redis-url"
+description = "Redis URL with password"
+regex = '''\bredis(\+ssl)?:\/\/[^:\s]+:[^@\s]+@[^/\s:]+(:\d+)?'''
+secretGroup = 0
+
+[[rules]]
+id = "jwt"
+description = "Likely JWT (3 dot-separated base64url segments)"
+regex = '''\beyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\b'''
+secretGroup = 0
+
+[[rules]]
+id = "generic-api-key-ish"
+description = "Generic API key label with long token"
+regex = '''(?i)\b(api|access|secret|private|client)[\s_\-]*key\b.{0,20}['"]?([A-Za-z0-9/\+_=|-]{20,})['"]?'''
+secretGroup = 2
+entropy = 3.5
+
+[[rules]]
+id = "generic-token-ish"
+description = "Generic token label with long value"
+regex = '''(?i)\b(token|bearer|authorization)\b.{0,20}['"]?([A-Za-z0-9\.\-_]{20,})['"]?'''
+secretGroup = 2
+entropy = 3.2

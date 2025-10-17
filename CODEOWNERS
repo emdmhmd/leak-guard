@@ -1,0 +1,2 @@
+/.gitleaks.toml @your-org/security
+/.github/workflows/ @your-org/security

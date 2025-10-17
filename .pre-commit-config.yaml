@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.3
+    hooks:
+      - id: gitleaks
+        name: gitleaks (staged protect)
+        args: ["--verbose", "--redact", "--staged", "--config=.gitleaks.toml"]
+
+  - repo: local
+    hooks:
+      - id: gitleaks-pre-push
+        name: gitleaks (pre-push full tree scan)
+        entry: gitleaks detect --source . --verbose --redact --config=.gitleaks.toml --exit-code 1
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+  - repo: local
+    hooks:
+      - id: gitleaks-full
+        name: gitleaks (manual full repo audit)
+        entry: gitleaks detect --source . --verbose --redact --config=.gitleaks.toml --exit-code 1
+        language: system
+        pass_filenames: false
+        stages: [manual]
