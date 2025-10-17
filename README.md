@@ -44,7 +44,7 @@ leak-guard/
 ---
 
 ## Quick start (as a template)
-you need to be logged in Github to see a green button on the right corner.
+You need to be logged in Github to see a green button on the top right corner.
 Click this button and use it as a template.
 ### Use this a the template
 
