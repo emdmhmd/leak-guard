@@ -45,7 +45,8 @@ leak-guard/
 ---
 
 ## Quick start (as a template)
-
+you need to be logged in Github to see a green button on the right corner.
+Click this button and use it as a template.
 ### Use this a the template
 
 1. Click **Use this template → Create a new repository**.  
